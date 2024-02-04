@@ -1,0 +1,20 @@
+### Create branch 1
+POST http://localhost:8081/api/branches
+Content-Type: application/json
+
+{
+  "name": "Branch 1",
+  "address": "City 1, Street 1"
+}
+
+### Create branch 2
+POST http://localhost:8081/api/branches
+Content-Type: application/json
+
+{
+  "name": "Branch 2",
+  "address": "City 2, Street 2"
+}
+
+### Get branches
+GET http://localhost:8081/api/branches

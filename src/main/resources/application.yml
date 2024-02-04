@@ -1,0 +1,10 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: company-branch-service
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: user
+    password: pass
