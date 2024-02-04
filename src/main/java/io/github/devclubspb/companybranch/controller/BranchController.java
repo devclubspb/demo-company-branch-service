@@ -7,9 +7,11 @@ import io.github.devclubspb.companybranch.payload.BranchResponse;
 import io.github.devclubspb.companybranch.service.BranchService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequiredArgsConstructor
@@ -29,8 +31,11 @@ public class BranchController {
     }
 
     @GetMapping
-    public List<BranchResponse> getBranches() {
-        return branchService.getAllBranches().stream()
+    public List<BranchResponse> getBranches(@RequestParam(required = false) Set<Long> ids) {
+        List<Branch> branches = CollectionUtils.isEmpty(ids)
+                ? branchService.getAllBranches()
+                : branchService.findBranchesByIds(ids);
+        return branches.stream()
                 .map(this::mapDomain2Response)
                 .toList();
     }
