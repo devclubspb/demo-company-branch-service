@@ -18,3 +18,6 @@ Content-Type: application/json
 
 ### Get branches
 GET http://localhost:8081/api/branches
+
+### Get branch 1
+GET http://localhost:8081/api/branches/1

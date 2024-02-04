@@ -6,6 +6,7 @@ import io.github.devclubspb.companybranch.payload.BranchRequest;
 import io.github.devclubspb.companybranch.payload.BranchResponse;
 import io.github.devclubspb.companybranch.service.BranchService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,6 +33,14 @@ public class BranchController {
         return branchService.getAllBranches().stream()
                 .map(this::mapDomain2Response)
                 .toList();
+    }
+
+    @GetMapping("/{branchId}")
+    public ResponseEntity<BranchResponse> getBranch(@PathVariable Long branchId) {
+        return branchService.findBranchById(branchId)
+                .map(this::mapDomain2Response)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     private BranchResponse mapDomain2Response(Branch domain) {

@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -30,6 +31,12 @@ public class SimpleBranchService implements BranchService {
         return branchRepository.findAllSortedByName().stream()
                 .map(this::mapEntity2Domain)
                 .toList();
+    }
+
+    @Override
+    public Optional<Branch> findBranchById(Long branchId) {
+        return branchRepository.findById(branchId)
+                .map(this::mapEntity2Domain);
     }
 
     private Branch mapEntity2Domain(BranchEntity entity) {
